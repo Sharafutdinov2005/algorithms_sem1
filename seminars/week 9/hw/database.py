@@ -42,7 +42,7 @@ class Database:
         self.column_priorities = list(map(int, input().split()))
 
         for _ in range(n):
-            line, elements = self.load_line()
+            line, elements = self._load_line()
             self.lines.append(
                 _DatabaseLine(
                     name=line,
@@ -50,20 +50,19 @@ class Database:
                 )
             )
 
-        self.lines.sort()
+        self.lines.sort(reverse=True)
 
-    def load_line(
+    def _load_line(
         self,
     ) -> Tuple[str, list[int]]:
         line = input().split()
-        class_members = [line[i] for i in self.column_priorities]
+        class_members = [int(line[i]) for i in self.column_priorities]
         return line[0], class_members
 
     def __str__(
         self
     ) -> str:
         lables = [str(line) for line in self.lines]
-        lables.reverse()
         return '\n'.join(lables)
 
 
