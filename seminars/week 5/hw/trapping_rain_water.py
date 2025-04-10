@@ -14,7 +14,6 @@ def calculate_water(map):
     ans = 0
     previous_hight = [Column(map[0], 0)]
     for i in range(1, len(map)):
-        print(f"Iteration{i}:", *previous_hight, sep="\n", end="\n\n")
         if len(previous_hight) == 1 and map[i] > previous_hight[0].value:
             previous_hight[0] = Column(map[i], i)
             continue
@@ -23,7 +22,6 @@ def calculate_water(map):
             previous_hight.append(Column(map[i], i))
 
         elif map[i] > previous_hight[-1].value:
-            print("+")
             flag = None
             while (
                 len(previous_hight) > 1
@@ -41,12 +39,10 @@ def calculate_water(map):
                     previous_hight[0] = Column(map[i], i)
 
             if len(previous_hight) > 1 and map[i] == previous_hight[-2].value:
-                print("+")
                 ans += (
                     (previous_hight[-2].value - previous_hight[-1].value) *
                     (i - previous_hight[-1].index)
                 )
-                print(f"{ans=}")
                 previous_hight.pop()
 
             if (
